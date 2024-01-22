@@ -48,7 +48,7 @@ export const stocksApi = createApi({
           url: API_BASE_URL,
           params: {
             'i.type': searchBy ? searchBy : undefined,
-            'i.name': searchBy ? undefined : search,
+            'i.name': searchBy ? undefined : search.toUpperCase(),
             _sort: 'market',
           },
         }
