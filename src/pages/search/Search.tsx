@@ -1,20 +1,43 @@
-import React from 'react'
-import {StyleSheet, Text, View} from 'react-native'
+import React, {useState} from 'react'
+import {ActivityIndicator, FlatList, StyleSheet} from 'react-native'
+import {useSearchStocksQuery} from '../../store/stocks/stocksApi.ts'
+import StockCard from '../../components/StockCard.tsx'
+import SearchBar from './components/SearchBar.tsx'
+import {debounce} from 'lodash'
 
 const Search = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Search page</Text>
-    </View>
+  const [search, setSearch] = useState('')
+  const {data, isLoading} = useSearchStocksQuery(
+    {
+      search,
+    },
+    {refetchOnMountOrArgChange: true, skip: !search},
+  )
+
+  const stocks = data?.length ? data : []
+
+  const handleOnSearchChange = debounce((searchValue: string) => {
+    setSearch(searchValue)
+  }, 600)
+
+  return isLoading ? (
+    <ActivityIndicator size={32} />
+  ) : (
+    <>
+      <SearchBar onSearchValueChange={handleOnSearchChange} />
+      <FlatList
+        data={stocks}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({item}) => <StockCard stock={item} />}
+        contentContainerStyle={styles.container}
+      />
+    </>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-  },
-  text: {
-    color: 'white',
   },
 })
 

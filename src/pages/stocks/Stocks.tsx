@@ -5,17 +5,15 @@ import StockCard from '../../components/StockCard.tsx'
 
 const Stocks = () => {
   const [page, setPage] = useState(1)
-  const {data, isLoading, isFetching, error} = useGetStocksQuery(
+  const {data, isLoading, isFetching} = useGetStocksQuery(
     {
       _page: page,
     },
     {refetchOnMountOrArgChange: true},
   )
 
-  console.log('VIEW', {data, error})
-
   const handleEndReached = useCallback(() => {
-    if (isLoading || isFetching) {
+    if (isLoading || isFetching || !data) {
       return
     }
     setPage(data.next)

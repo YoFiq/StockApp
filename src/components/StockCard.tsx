@@ -8,8 +8,6 @@ type Props = {
 }
 
 const StockCard = ({stock}: Props) => {
-  // console.log('stock', stock)
-
   const {
     market,
     i: {
