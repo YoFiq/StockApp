@@ -9,7 +9,7 @@ export const stocksApi = createApi({
   reducerPath: 'stocksApi',
   baseQuery: fetchBaseQuery({baseUrl: API_BASE_URL}),
   endpoints: builder => ({
-    getStocks: builder.query<any, any>({
+    getStocks: builder.query<DtoStockResults, any>({
       query: ({_page = 1}) => {
         return {
           url: API_BASE_URL,

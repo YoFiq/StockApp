@@ -1,6 +1,11 @@
 type EntityResults<TEntity> = {
-  items: TEntity[]
-  totalItems: number
+  data: TEntity[]
+  first: number
+  prev: number
+  next: number
+  last: number
+  pages: number
+  items: number
 }
 
 export default EntityResults

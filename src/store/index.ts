@@ -7,7 +7,6 @@ export const store = configureStore({
     [stocksApi.reducerPath]: stocksApi.reducer,
   },
   middleware: getDefaultMiddleware =>
-    // {serializableCheck: false,}
     getDefaultMiddleware().concat([stocksApi.middleware]),
 })
 

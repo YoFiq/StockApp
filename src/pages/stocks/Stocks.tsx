@@ -1,7 +1,7 @@
 import React, {useCallback, useState} from 'react'
-import {ActivityIndicator, FlatList, StyleSheet, Text, View} from 'react-native'
+import {ActivityIndicator, FlatList, StyleSheet} from 'react-native'
 import {useGetStocksQuery} from '../../store/stocks/stocksApi.ts'
-import DtoStock from '../../types/stocks/DtoStock.ts'
+import StockCard from '../../components/StockCard.tsx'
 
 const Stocks = () => {
   const [page, setPage] = useState(1)
@@ -18,8 +18,8 @@ const Stocks = () => {
     if (isLoading || isFetching) {
       return
     }
-    setPage(prevPage => prevPage + 1)
-  }, [isLoading, isFetching, setPage])
+    setPage(data.next)
+  }, [isLoading, isFetching, setPage, data])
 
   return isLoading ? (
     <ActivityIndicator size={32} />
@@ -27,12 +27,9 @@ const Stocks = () => {
     <FlatList
       data={data ? data.data : []}
       keyExtractor={item => item.id.toString()}
-      renderItem={({item}) => (
-        <View>
-          <Text style={styles.text}>{item.i.name}</Text>
-        </View>
-      )}
+      renderItem={({item}) => <StockCard stock={item} />}
       onEndReached={handleEndReached}
+      contentContainerStyle={styles.container}
     />
   )
 }
@@ -40,9 +37,6 @@ const Stocks = () => {
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-  },
-  text: {
-    color: 'white',
   },
 })
 

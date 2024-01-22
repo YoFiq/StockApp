@@ -5,6 +5,7 @@ import {IconProps, MagnifyingGlass, TrendUp} from 'phosphor-react-native'
 
 import Stocks from '../pages/stocks/Stocks.tsx'
 import Search from '../pages/search/Search.tsx'
+import {COLORS} from '../constants/colors.ts'
 
 const DEFAULT_ICON_PROPS = (focused: boolean): IconProps => {
   return {
@@ -16,8 +17,8 @@ const DEFAULT_ICON_PROPS = (focused: boolean): IconProps => {
 const TabNavigator = () => {
   const options: BottomTabNavigationOptions = useMemo(
     () => ({
-      tabBarActiveTintColor: '#0075FF',
-      tabBarInactiveTintColor: '#8A8A8A',
+      tabBarActiveTintColor: COLORS.blue,
+      tabBarInactiveTintColor: COLORS.grayIcon,
       keyboardHidesTabBar: true,
     }),
     [],
