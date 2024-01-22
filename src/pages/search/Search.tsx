@@ -14,6 +14,7 @@ const Search = () => {
     {refetchOnMountOrArgChange: true, skip: !search},
   )
 
+  //TODO as we have a bit different query, without pagination we need to add proper types
   const stocks = data?.length ? data : []
 
   const handleOnSearchChange = debounce((searchValue: string) => {

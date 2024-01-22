@@ -16,7 +16,7 @@ export const stocksApi = createApi({
           url: API_BASE_URL,
           params: {
             _page,
-            _sort: 'market',
+            _sort: 'market', //TODO needs to be added second sorting param
           },
         }
       },
@@ -38,10 +38,12 @@ export const stocksApi = createApi({
       },
     }),
 
+    //TODO needs to be added pagination for searched values and add 2nd param for sorting
     searchStocks: builder.query<DtoStockResults, StocksQueryParams>({
       query: ({search}) => {
         const searchBy = isValueIncludedInEnum(search)
 
+        // TODO needs to
         return {
           url: API_BASE_URL,
           params: {
